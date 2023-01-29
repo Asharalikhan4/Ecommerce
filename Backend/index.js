@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import authRoutes from "./routes/auth.js";
 import adminRoutes from "./routes/admin/auth.js";
 import categoryRoutes from "./routes/category.js";
+import productRoutes from "./routes/product.js";
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.get("/",(req, res) => {
 app.use("/api", authRoutes);
 app.use("/api", adminRoutes);
 app.use("/api", categoryRoutes);
+app.use("/api", productRoutes);
 
 
 
