@@ -7,6 +7,7 @@ import authRoutes from "./routes/auth.js";
 import adminRoutes from "./routes/admin/auth.js";
 import categoryRoutes from "./routes/category.js";
 import productRoutes from "./routes/product.js";
+import cartRoutes from "./routes/cart.js";
 
 const app = express();
 
@@ -31,7 +32,7 @@ app.use("/api", authRoutes);
 app.use("/api", adminRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", productRoutes);
-
+app.use("/api", cartRoutes);
 
 
 // Server Connection
