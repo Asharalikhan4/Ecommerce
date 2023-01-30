@@ -1,10 +1,15 @@
+import * as dotenv from "dotenv";
+dotenv.config();
 import Category from "../models/category.js";
 import slugify from "slugify";
 
 export const addCategory = (req, res) => {
     const categoryObj = {
         name: req.body.name,
-        slug: slugify(req.body.name)
+        slug: slugify(req.body.name),
+    }
+    if(req.file){
+        categoryObj.categoryImage = process.env.API + "/public/" + req.file.filename;
     }
     if(req.body.parentId){
         categoryObj.parentId = req.body.parentId;
