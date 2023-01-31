@@ -1,9 +1,21 @@
 import React from "react";
+import { login } from "../../actions/auth";
+import { useDispatch } from "react-redux";
 
-const Signin = () => {
+const Signin = (props) => {
+  const dispatch = useDispatch();
+  
+  const userLogin = (e) => {
+    e.preventDefault();
+    const user = {
+      email: "test@gmail.com",
+      password: "123456"
+    }
+    dispatch(login(user));
+  }
   return (
     <div className="container">
-      <form className="w-50">
+      <form className="w-50" onSubmit={userLogin}>
         <div className="h1 my-3">Signin</div>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">
