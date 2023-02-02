@@ -2,6 +2,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 import express from "express";
 import mongoose from "mongoose";
+import cors from "cors";
 import path from 'path';
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
@@ -18,6 +19,7 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use("/public", express.static(path.join(__dirname, "uploads")));
+app.use(cors());
 
 // Database Connection
 mongoose.set('strictQuery', true);
