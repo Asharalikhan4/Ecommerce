@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const User = require("../models/userModel");
 const generateToken = require("../config/jwtToken");
 
+// user register
 const register = async (req, res) => {
     try {
         const { firstname, lastname, email, mobile, password } = req.body;
@@ -58,6 +59,7 @@ const register = async (req, res) => {
     }
 };
 
+// user login
 const login = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -119,4 +121,46 @@ const login = async (req, res) => {
     }
 };
 
-module.exports = { register, login };
+// get all user
+const getAllUser = async(req, res) => {
+    try{
+        const getUsers = await User.find();
+        res.json(getUsers);
+    } catch (error){
+        res.status(400).json({
+            error: `Your request could not be processed. Please try again. ${error}`
+        });
+    }
+}
+
+//get single user
+const getUser = async(req, res) => {
+    try{
+        const { id } = req.params;
+        const requestedUser = await User.findById(id);
+        res.json({
+            requestedUser,
+        });
+    } catch (error){
+        res.status(400).json({
+            error: `Your request could not be processed. Please try again. ${error}`
+        });
+    }
+}
+
+// delete a user
+const deleteUser = async(req, res) => {
+    try{
+        const { id } = req.params;
+        const deletedUser = await User.findByIdAndDelete(id);
+        res.json({
+            deletedUser,
+        });
+    } catch (error){
+        res.status(400).json({
+            error: `Your request could not be processed. Please try again. ${error}`
+        });
+    }
+}
+
+module.exports = { register, login, getAllUser, getUser, deleteUser };
