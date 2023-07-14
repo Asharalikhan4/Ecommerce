@@ -2,13 +2,15 @@ require('dotenv').config();
 const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
+const morgan = require("morgan");
 
 
 const dbConnect = require("./config/dbConnect");
-const authRoutes = require("./routes/authRoutes");
+const authRouter = require("./routes/authRoute");
+const productRouter = require("./routes/productRoute");
 const { notFound, errorHandler } = require('./middlewares/errorHandler');
 
-
+app.use(morgan("dev"));
 app.use(express.json());
 app.use(cookieParser());
 
@@ -16,7 +18,8 @@ app.get("/", (req, res) => {
     res.send("Hello, World!");
 });
 
-app.use("/api/user", authRoutes);
+app.use("/api/user", authRouter);
+app.use("/api/product", productRouter);
 app.use(notFound);
 app.use(errorHandler);
 
