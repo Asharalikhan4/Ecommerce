@@ -28,33 +28,35 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    sold: {
-        type: Number,
-        default: 0,
-    },
     quantity: {
         type: Number,
         required: true,
     },
-    images: [],
-    color: {
-        type: String,
-        required: true,
+    sold: {
+        type: Number,
+        default: 0,
     },
-    ratings: [{
-        star: Number,
-        comment: String,
-        postedby: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User",
-        }
-    }],
+    images: [
+        {
+            public_id: String,
+            url: String,
+        },
+    ],
+    color: [],
+    tags: String,
+    ratings: [
+        {
+            star: Number,
+            comment: String,
+            postedby: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+        },
+    ],
     totalrating: {
         type: String,
         default: 0,
     },
-},{
-    timestamps: true,
-});
+},
+    { timestamps: true }
+);
 
 module.exports = mongoose.model("Product", productSchema);
